@@ -52,24 +52,9 @@ namespace Sokoban.SolverTool
                 int intValue = AsInteger(stringValue);
                 bool boolValue = intValue != 0;
 
-#if false
-                if (arg == "--deadlock-directory")
-                {
-                    tool.DeadlocksDirectory = stringValue;
-                    i++;
-                    continue;
-                }
-
                 if (arg == "--level-number")
                 {
                     levelIndex = intValue - 1;
-                    i++;
-                    continue;
-                }
-
-                if (arg == "--force-calculate")
-                {
-                    tool.ForceCalculate = boolValue;
                     i++;
                     continue;
                 }
@@ -114,7 +99,6 @@ namespace Sokoban.SolverTool
                         tool.ProcessLevelSet(file);
                     }
                 }
-#endif
             }
         }
 
