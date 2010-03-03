@@ -67,4 +67,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>$(SolutionDir)\laa.cmd "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
