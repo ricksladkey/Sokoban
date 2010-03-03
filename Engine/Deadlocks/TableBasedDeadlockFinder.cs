@@ -270,7 +270,7 @@ namespace Sokoban.Engine.Deadlocks
         private void VerifyDeadlock(Array2D<bool> map, params Coordinate2D[] coords)
         {
             Level subsetLevel = LevelUtils.GetSubsetLevel(level, false, coords);
-            Solver solver = Solver.CreateInstance(SolverAlgorithm.LowerBound);
+            ISolver solver = Solver.CreateInstance(SolverAlgorithm.LowerBound);
             solver.Level = subsetLevel;
             solver.OptimizeMoves = false;
             solver.OptimizePushes = true;

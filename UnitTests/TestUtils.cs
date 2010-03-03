@@ -155,7 +155,7 @@ namespace Sokoban.UnitTests
 
         public static MoveList QuickSolve(Level level, bool optimizeMoves, bool optimizePushes, bool useLowerBound)
         {
-            Solver solver = Solver.CreateInstance(useLowerBound ? SolverAlgorithm.BruteForce : SolverAlgorithm.BruteForce);
+            ISolver solver = Solver.CreateInstance(useLowerBound ? SolverAlgorithm.BruteForce : SolverAlgorithm.BruteForce);
             Log.DebugPrint("Solving level {0}", level.Name);
             solver.Level = level;
             solver.OptimizeMoves = optimizeMoves;
@@ -176,7 +176,7 @@ namespace Sokoban.UnitTests
             if (reuseSolver)
             {
                 List<MoveList> solutions = new List<MoveList>();
-                Solver solver = Solver.CreateInstance(useLowerBound ? SolverAlgorithm.BruteForce : SolverAlgorithm.BruteForce);
+                ISolver solver = Solver.CreateInstance(useLowerBound ? SolverAlgorithm.BruteForce : SolverAlgorithm.BruteForce);
                 int index = 0;
                 foreach (Level level in levels)
                 {

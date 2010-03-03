@@ -38,7 +38,7 @@ namespace Sokoban.Player
     public partial class SolverDialog : Form
     {
         private MainWindow mainWindow;
-        private Solver solver;
+        private ISolver solver;
         private Thread solverThread;
         private MoveList solution;
         private bool solving;

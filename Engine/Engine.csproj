@@ -83,6 +83,7 @@
     <Compile Include="Deadlocks\DeadlockFinder.cs" />
     <Compile Include="Deadlocks\DeadlockUtils.cs" />
     <Compile Include="Solvers\CurrentState.cs" />
+    <Compile Include="Solvers\ISolver.cs" />
     <Compile Include="Solvers\MoveState.cs" />
     <Compile Include="Solvers\NodeFlags.cs" />
     <Compile Include="Solvers\NodeHelper.cs" />

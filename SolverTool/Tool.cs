@@ -33,7 +33,7 @@ namespace Sokoban.SolverTool
 {
     public class Tool
     {
-        private Solver solver;
+        private ISolver solver;
 
         public Tool()
         {

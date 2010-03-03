@@ -62,7 +62,7 @@ namespace Sokoban.LevelSorter
 
         TransformationInvariantLevelSet set;
         List<LevelInfo> results;
-        private Solver persistentSolver;
+        private ISolver persistentSolver;
 
         public string OutputFile
         {
@@ -568,7 +568,7 @@ namespace Sokoban.LevelSorter
         {
             try
             {
-                Solver solver = reuseSolver ? persistentSolver : Solver.CreateInstance();
+                ISolver solver = reuseSolver ? persistentSolver : Solver.CreateInstance();
                 solver.OptimizeMoves = optimizeMoves;
                 solver.OptimizePushes = optimizePushes;
                 solver.MaximumNodes = nodes;

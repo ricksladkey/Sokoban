@@ -30,7 +30,7 @@ namespace Sokoban.Engine.Deadlocks
 {
     class ForewardsSubsetSolver : SubsetSolver
     {
-        private Solver solver;
+        private ISolver solver;
 
         public ForewardsSubsetSolver(Level level)
             : base(level)

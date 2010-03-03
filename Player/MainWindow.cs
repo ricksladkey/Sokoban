@@ -584,7 +584,7 @@ namespace Sokoban.Player
             string soluble = "unknown";
             try
             {
-                Solver solver = Solver.CreateInstance();
+                ISolver solver = Solver.CreateInstance();
                 solver.OptimizeMoves = false;
                 solver.OptimizePushes = false;
                 solver.Level = level;

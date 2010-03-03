@@ -89,7 +89,7 @@ namespace Sokoban.LevelGenerator
             public int Index;
             public int Seed;
             public Random Random;
-            public Solver Solver;
+            public ISolver Solver;
             public Logger Log;
             public int CurrentDesign;
             public int CurrentSize;
@@ -142,7 +142,7 @@ namespace Sokoban.LevelGenerator
         private Semaphore semaphore;
         private int designCount;
         private DesignInfo[] designInfo;
-        private Queue<Solver> solverQueue;
+        private Queue<ISolver> solverQueue;
 
         public string OutputFile
         {
@@ -514,7 +514,7 @@ namespace Sokoban.LevelGenerator
             rejectSokobanOnTarget = false;
             moveSokoban = true;
             outputFile = "LevelGenerator.xsb";
-            solverQueue = new Queue<Solver>();
+            solverQueue = new Queue<ISolver>();
         }
 
         private void Initialize()
@@ -561,7 +561,7 @@ namespace Sokoban.LevelGenerator
 
         private MoveList Solve(State state, Level level, bool optimizeMoves, bool optimizePushes)
         {
-            Solver solver = state.Solver;
+            ISolver solver = state.Solver;
             solver.OptimizeMoves = optimizeMoves;
             solver.OptimizePushes = optimizePushes;
             solver.MaximumNodes = nodes;
@@ -583,7 +583,7 @@ namespace Sokoban.LevelGenerator
             return null;
         }
 
-        private Solver GetSolver()
+        private ISolver GetSolver()
         {
             if (!reuseSolver)
             {
@@ -601,7 +601,7 @@ namespace Sokoban.LevelGenerator
             }
         }
 
-        private void ReleaseSolver(Solver solver)
+        private void ReleaseSolver(ISolver solver)
         {
             if (!reuseSolver)
             {
@@ -614,7 +614,7 @@ namespace Sokoban.LevelGenerator
             }
         }
 
-        private Solver CreateSolver()
+        private ISolver CreateSolver()
         {
             return Solver.CreateInstance(SolverAlgorithm.BruteForce);
         }

@@ -36,14 +36,14 @@ using Sokoban.Engine.Utilities;
 
 namespace Sokoban.Engine.Solvers
 {
-    public abstract class Solver
+    public abstract class Solver : ISolver
     {
-        public static Solver CreateInstance()
+        public static ISolver CreateInstance()
         {
             return CreateInstance(SolverAlgorithm.BruteForce);
         }
 
-        public static Solver CreateInstance(SolverAlgorithm algorithm)
+        public static ISolver CreateInstance(SolverAlgorithm algorithm)
         {
             switch (algorithm)
             {

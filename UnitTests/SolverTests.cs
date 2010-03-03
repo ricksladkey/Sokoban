@@ -36,7 +36,7 @@ namespace Sokoban.UnitTests
         [Test]
         public void SolverInstanceTest()
         {
-            Solver solver = Solver.CreateInstance();
+            ISolver solver = Solver.CreateInstance();
         }
 
         [Test]
@@ -205,7 +205,7 @@ namespace Sokoban.UnitTests
         public void SolveTwiceTest()
         {
             Level level = TestUtils.LoadLevelSetLevel(TestData.NabokosmosLevelSetFile, 1);
-            Solver solver = Solver.CreateInstance();
+            ISolver solver = Solver.CreateInstance();
             solver.Level = level;
             solver.OptimizeMoves = false;
             solver.OptimizePushes = true;
