@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevelGenerator", "LevelGene
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{31BAE4EE-4281-4885-8176-4DDE79E0E000}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolverTool", "SolverTool\SolverTool.csproj", "{437CE06B-E9E4-4619-A002-190A672ABE30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,12 @@ Global
 		{31BAE4EE-4281-4885-8176-4DDE79E0E000}.Release (Reference)|Any CPU.Build.0 = Release (Reference)|Any CPU
 		{31BAE4EE-4281-4885-8176-4DDE79E0E000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31BAE4EE-4281-4885-8176-4DDE79E0E000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{437CE06B-E9E4-4619-A002-190A672ABE30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{437CE06B-E9E4-4619-A002-190A672ABE30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{437CE06B-E9E4-4619-A002-190A672ABE30}.Release (Reference)|Any CPU.ActiveCfg = Release|Any CPU
+		{437CE06B-E9E4-4619-A002-190A672ABE30}.Release (Reference)|Any CPU.Build.0 = Release|Any CPU
+		{437CE06B-E9E4-4619-A002-190A672ABE30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{437CE06B-E9E4-4619-A002-190A672ABE30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,5 +81,6 @@ Global
 		{AC2E1714-944C-4E12-AFD3-35C3581D8F5C} = {0A7FE9DE-1651-41B7-A8AD-D5F81CABF4E0}
 		{1892635F-D2E2-485B-BFAC-8DB70835617B} = {0A7FE9DE-1651-41B7-A8AD-D5F81CABF4E0}
 		{31BAE4EE-4281-4885-8176-4DDE79E0E000} = {0A7FE9DE-1651-41B7-A8AD-D5F81CABF4E0}
+		{437CE06B-E9E4-4619-A002-190A672ABE30} = {0A7FE9DE-1651-41B7-A8AD-D5F81CABF4E0}
 	EndGlobalSection
 EndGlobal
