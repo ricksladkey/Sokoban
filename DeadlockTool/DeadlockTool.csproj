@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release %28Reference%29|AnyCPU' ">
-    <OutputPath>bin\Release %28Reference%29\</OutputPath>
+    <OutputPath>..\bin\Release %28Reference%29\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
