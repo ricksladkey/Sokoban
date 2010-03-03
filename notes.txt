@@ -1,0 +1,619 @@
+Hot List
+
+- in debug mode clear findRow and findColumn when not dirty
+- repair deadlock finder logging to console window
+- make segmented array conditional
+- compare memory usage and performance of my set vs. .NET set
+- write pure set class
+- make position set keys immutable if possible
+- upgrade to .NET 3.5
+- add capability to advance to the next set of zobrist keys
+- add unit tests for deadlocks with variations
+- make deadlock 1) boxes and 2) capacity & 3) assessPosibility configurable
+- don't re-pre-calculate level if the floor plan is the same and
+  the number of boxes is the same, must not assess possibility
+  since the sokoban can move and must use an alternative to
+  the simple deadlock map
+- removing sokoban while mark accessible is true should clear accessible
+  but doing so requires modifying the transformation invariant level set
+- add asynchronous deadlocks to main window deadlock handling
+- move calculate push map and pull map into utilities
+- write solver tool
+- fold long solutions when copying
+- allow backslash in pasted solutions
+- try using hashcode before equals during hashtable lookup
+- detect and remove impossible deadlocks
+- move unreliable deadlock validation into the solver
+
+Done Recently
+
+- allow deadlocks to log progress using cancel info
+- allow deadlock detection to be interruptible
+- use interface references where possible
+- add ISet, IPositionLookupTable, and IPositionSet interfaces
+- write a specialized generic set class (placeholder)
+- write a segmented hashtable and use it for the position lookup table
+- rename action to operation
+- upgrade to framework version 3.5
+- implement standard collection interfaces for hashtable
+- conditionally validate level operations
+- add double hashing to hashtable to prevent clustering
+- add two-layer hashtable to ease memory management
+- add initial capacity to solver options (vs maximum nodes)
+- add reset to solver options
+- retain solver settings from one solve session to the next
+- limit forward deadlock finder with max capacity
+- add copyright notices to all files
+- make namespaces match directory structure
+- implement segmented array as node collection data structure
+- use the optimal size integer for reliable position set
+- fix MF8 deadlocks (see below)
+- add +/-10% zoom
+- Cannot solve even though solvable (see below)
+
+To Do
+
+- add facility for deadlock finders to report which boxes are deadlocked
+- systematically use [Mm]ax and [Mm]in or [Mm]aximum and [Mm]inimum
+- systematically use [Ss]quare instead of [Cc]oord or [Cc]oordinate
+- validate deadlock hash codes still correct when using 64-bit hash keys
+- manually free four-box deadlocks when not relying on base finder
+- add progress reporting to calculated deadlocks
+- move deadlock calculation to a dialog
+- add deadlock loading and detection to info
+- allow one square corrals to be conditional
+- use Level.GetHashCode instead of Level.GetHashKey for deadlock key
+- researching using ArraySegment instead of FragmentedArray
+- unify all uses of debug output using LevelUtils.DebugOut
+- figure out which classic quest 4 triple requires more than 10k nodes
+- research two-dimensional coordinate comparison operators
+- debuggerwriter - http://www.u2u.info/Blogs/Kris/Lists/Posts/Post.aspx?ID=11
+- try new triple heuristic: if any box doesn't touch a wall
+  and isn't adjacent to one of the other two boxes, skip it
+- include frozen deadlocks in deadlock iterator when relying on base finder
+- move solver allocation to before level pre-calculation
+- rewrite calculated deadlock finder to find arbitrary deadlocks
+- systematically use table for one dimensional arrays and map for two
+- systematically use entry instead of info
+- check whether a conditional triple is the union of two conditional pairs
+- check whether a conditional triple is a superset of a conditional pair
+- write better lower bound function
+- count deadlocks
+- think about detecting "unmoving" parent move when finding children
+- make solver info a read-only control
+- write a method to reconstruct the level for a node in the tree
+- do generate runs for 3yi through 6yi designs
+- consider adding descendants node enumerator
+- validate parents when validating in solver
+- evaluate using width - 2 for row multiplier instead of width
+- detect rudimentary corrals
+- re-validate hash keys with virtual sokoban
+- consider delaying undoing a solver move
+- add coordinate comparison operators, e.g. for use by sort boxes
+- make static direction functions non-static
+- review !IsBox usage for no-infuence pushes in no-box map
+- handle/detect normalization that erases the entire level
+- fix lost sokoban during tunnel normalization
+- retest normalization after changes
+- write LevelUtils unit tests
+
+- gray out solver options during solving
+- don't record solver allocated until allocation succeeds
+- catch and rethrow solver exceptions for info reporting
+
+- add encoding that represents outside and accessible areas
+- try making node a template of hashtype
+- print level number in generator and sorter output
+- print generatedCount in generator output
+- change File -> Exit to File -> Close and make a File -> Exit that exits
+- create sokoban user control and refactor main window to use it
+- normalize generalized caves
+- consider targets at loop entrances
+- add coordinate arithmetic including directions
+- support preferred aspect ratio
+- make solver dialog settings persistent between uses
+- add pause on error exit
+- rename designs from .txt to .dsb
+- add square removal to tools menu
+- move square removal to level utils
+- store backwards mode in serialized levels
+- assign difficulty and write hints
+- work on warehouse hard levels
+- check for warehouse duplicates with other authors
+- add generate performance unit test based on test-gen
+- tune occupied threshold for clearing all hastable entries
+- move level hashing into LevelUtils
+
+- detect corrals: www.sokobano.de/wiki/index.php?title=Solver
+- write a program the produce stats about a level set
+- make the sokoban assembly a DLL
+- find a way to measure the number of difficulty of the finale
+  (e.g. WAREHOUSE-unsorted-69 is harder than its changes indicate)
+- find a way to assess the presence of implicit dead ends
+- check for duplicates earlier to avoid unnecessary square removal
+- add picokosmos unit test for 12, 13 or 17
+- optionally pursue designs in proportion to their productivity
+- add toolbar for level editing
+- remove optional changes from change count (hard)
+- write rooms and halls generator (hard)
+- generate rounder blobs
+- support min and max density
+- print time in log
+- don't require a design to be rectangular
+- store moves for a level in the level set itself
+- handle missing sokoban when moving, etc.
+- add "auto-solve" mode for designing levels
+- make name status bar optional
+- add facility to decorate a level set with solutions and statistics
+- use status bar container
+
+Done
+
+- take neighbors map idea from solver and use it in backwards deadlock solver
+- add all frozen levels before any calculated levels
+- check whether frozen sets require sorting prior to subset checking
+- add facility for file-based pre-calculated deadlocks
+- ensure all 4 3y generated level sets are saved (lost one)
+- bug calculate score *after* doing the move
+- validate that the score of the root node is monotonically increasing
+- add double enumerator helper
+- fix level.MarkAccessible -> shouldn't mark boxes as accessible
+- replace level.IsComplete with node.Complete in SearchNode
+- record parents in vertical parent array
+- handle special cases in SearchNode
+- reinstate debug hash key validation
+- remove node enumerator and add children property
+- rename FastQueue to FixedQueue
+- move finder selection into path finder
+- abstract array path finder base for the three similar finders
+- change path finder from an interface to a base class
+- add small level shortest path finder for use when distances will be small
+- refactor shortest path finder in the style of any path finder
+- check boolean finder visited optimization against dijkstra finder
+- write boolean finder
+- refactor to use vector arithmetic when not speed critical
+- use box coordinates when calculating solution changes
+- validate new min box moves and solution changes
+- add isvalid to array2d
+- time new regularized data structures
+- use box coordinates when calculating min box moves
+- regularize direction, action, action direction pair and coordinate2d
+- use cachable coordinates by row for inside coordinates in level
+- add reusable coordinates by row data structure
+- use flag for MarkAccessible and do it automatically
+- add conditional incremental hash key validation
+- add incremental hash key calculation when not optimizing moves
+- add inside coordinates by row data structure for coordinate iteration
+- add incremental hash key calculation when optimizing moves
+- remove hash key from node and recalculate it when needed to save memory
+- consistently use h and v over hOffset and vOffset
+- use no box map to pre-calculate no influence pushes that lead to deadlock
+- bypass level for cell lookups in solver
+- copy state information when creating a playing level from a level
+- move box tracking to the level class
+- rotate the order of boxes tried
+- inline the assessed check when calling assess sokoban, etc.
+- keep track of where boxes are to speed up find children and is deadlocked
+- pre-calculate a push map of directions a box can usefully be pushed
+- pre-calculate inside coordinates and neighbors in Dijkstra's algorithm
+- add incremental update of hash key
+- abstract hash key into a value type
+- compare 64-bit zobrist keys with 32-bit zobrist keys
+- write custom 32-bit random number generator for zobrist keys
+- switch to Zobrist keys for level hashing
+- catch all unhandled exceptions to avoid error reporting dialog
+- add hashcode as last sort key so re-sorting is stable
+- find out why generator sometimes prints the wrong stats
+  (a moved sokoban can alter the solution)
+- use Level in generator
+- check for further uses of Level in LevelUtils
+- rewrite generator loops to use new coordinate enumerators
+- require only that sub-level be intact and soluble during square removal
+- only remove squares that don't corrupt the level
+- detect chiral pairs before database additions as well as after
+- use basic Level systematically in LevelUtils and Solver, Sorter and Generator
+- rename BasicLevel to Level and Level to PlayingLevel
+- use Array2D.FloodFill instead of Level.FloodFill
+- move DetectOutside to BasicLevel, generalize it, and speed it up
+- add Sokobans, Boxes and Targets properties
+- add IsClosed property to level
+- fix interactively adding floor to the edge of a level
+- fix normal-fix walls when there are no occupants
+- fix auto-fix walls "fixing" nearby undefined cells
+- add box, target and wall iterators
+- move coordinate iterator to a property
+- include region accessible to sokoban in level generator database
+- any square that it is impossible to push a box to should only
+  have two neighbor that are not walls and any interior island
+  that only contacts other walls or such squares can be removed
+- wall should match invalid coordinates (but be careful)
+- detect islands with holes
+- use a more efficient algorithm for the island map
+- implement preliminary Zobrist keys for level hashcode
+- speed up or eliminate Level.Reset
+- write BasicLevel base class that supports the array and tests
+- move Node class into a separate file
+- move coordinate interator functionality into array
+- find level is C:\Build\Sokoban\LevelGenerator-041.xsb that
+  causes infinite loop in loop normalization
+- use new four and eight neighbor iterators where possible
+- add four-neighbor and eight-neighbor iterators
+- fix basic frozen map bug
+- make corners of six box lobes undefined
+- normalize eight box lobe with island to six box lobe
+- make wall match outside in patterns
+- prevent row/column collisions in level hash
+- add normalized mirrored level to database to prevent mirror matches
+- assign don't add rotated/mirrored levels in level database
+- don't include sokoban in level database, use accessible region instead
+- add level normalization to level sorter
+- add normalize level to tools menu
+- add level normalization to generator
+- make lobes systematically point the same way
+- fix handling of level number on command line
+- handle sokoban in loop and tunnel patterns
+- shorten loops where possible
+  ####    ###
+  #       #
+  # ## => # #
+  #       #
+  ####    ###
+- shorten tunnels where possible
+  ##    #
+     =>
+  ##    #
+- revisit loma10
+
+Generator
+
+- add time limit to stop solving
+- include solution in output
+- support solutions in levelsets
+
+Solver
+
+- validate solution before pasting
+- record saved level filename for reuse
+- credit levelset and skin in about box
+- generate custom skin
+- improve efficiency of solver validation when using reference type
+- generalize facility to solve entire levelsets
+- add unit tests directly to the executable 
+- find out why value type node indexer is so slow
+- support compressing the node table
+- confirm duplicate nodes by linking it to its partner
+- support multiple threads
+- allocate nodes in extensible batches
+- detect as frozen (these are corrals):
+  #*   ## 
+  # *  # *
+  ###  # *
+       ##
+
+UI
+
+- add commas to printed node values
+- add variable replay rate (e.g. Slow/Medium/Fast)
+- copy all state to new window (moves, allow push/pull, etc.)
+- report whether nodes searched
+- report length of shortest solution
+- change Ctrl-S to Save As
+
+Features
+
+- add "Fix Level" feature:
+  - remove unneeded squares
+  - replace boxes on targets that don't move with walls
+
+Coding
+
+---------------------------------------------------------------------
+
+Done
+
+- add max nodes to solver dialog
+- add solver options to solver dialog
+- make solver dialog resizable
+- add move limit to generator and sorter
+- avoid local variables for generator and sorter options
+- find out why MicrocosmosPushesTest index 5 fails when
+  DetectNoInfluenceMoves is turned on (due to sorting multiple solutions)
+- add "reject sokoban on target" option to batch files
+- continue pushes through tunnels (prior art at sokobano)
+- catch exceptions when globbing
+- turn level generator database into a hashtable
+- disallow further moves once solved
+- use --design-file instead of --designs in generate.cmd
+- move Exit to bottom of File menu
+- unwind loaded XML levels to create "original" level
+- allow serialized level to be specified on the command line
+- detect as frozen:
+  #*
+   **
+    #
+- add deadlocked to information
+- use occupied list to iterate keys and values
+- include distance to first push in generator statistics
+- add output file options to generator and sorter
+- allow sorter design to be specified as a file
+- handle file not found on command line
+- handle exceptions from corrupt level sets
+- handle exceptions when writing generator results
+- add facility to parse statistic from the level name
+- fix amyeric level sets to be compatible with phone sokoban
+- replace more aymeric levels on phone
+- uniformly provide cell coordinate methods and use them
+- use traversal map to clean level
+- add facility to filter during sorting based on design
+- implement dynamic position database flag
+- associate .xsb files with sokoban application
+- rename .out files to .xsb files
+- chain hashtable buckets to speed clearing without allocation
+- don't collect solver stats when running in batch mode
+- delete accidental executables from the base directory
+- prevent exceptions when parsing non-integer arguments
+- add options to filter levels on rejection criteria when sorting
+- unify the bin directories
+- add minimum traversal count metric and traversal map
+- add copy one line to edit menu
+- when copying a level clean surrounding spaces
+- add clean level to tools menu
+- add trim level to tools menu
+- add option to exclude targets on frozen squares or on walls without egress
+- add option for "no sokoban on target"
+- add option to exclude levels with dead-end squares (default true)
+- trim level to solution twice, first using fast solver
+- Find out why optimize moves is wrong for picokosmos 12, 13, 17 (FNV hash)
+- fix crash if file cannot be opened for writing
+- test reusing the same solver
+- make generator's solver configurable
+- profile generation
+- replace mark accessible with shortest path
+- move functionality to clean up a level out of generator
+- check for final solver exceptions
+- check limits on results of final solver
+- add return value to add smallest level and handle failure
+- detect if title line of level set is missing
+- support randomly placed boxes
+- remove squares from solvable levels looking for harder levels
+- handle sokoban in pattern
+- all boxes must move, even with square removal
+- fix crlf in solver message when there are no solutions
+- add command line arguments for all generator config options
+- add option to fix walls
+- strictly obey specified wall and floor elements in supplied design
+- add density to header
+- modify level generation to support density
+- include secondary keys when sorting generated levels
+
+- detect generated duplicates
+- count changes
+- add upper and lower limit for size
+- require that all boxes move
+- detect and handle critical wall removal
+- add application context for multiple windows
+- add open level in new window feature
+- add explicit "backwards mode"
+- add validation of results: all nodes free, dormant or in the tree
+- fix XML parsing syntax error when level contains an empty row
+- figure out why running the solver after manually solving a level
+  isn't compabible with the level
+- fix exception when optimizing moves only
+- store free list in the table itself
+- store row and column and direction in bytes
+- remove parent field, use tree recursion instead
+- remove isterminal flag, use presence in the tree instead
+- remove searched flag, use presence of children instead
+- fix node leak when unlinking already searched positions
+- find out why number of visited nodes is different for ref and value types
+  for nabokosmos level 2 but duplicates are the same
+- continue searching tree until all nodes exceed length of shortest solution
+- restore old reference node to demonstrate that the codes
+  stays the same
+- allow levelset and level to be specified on the command line
+- Add node decorator to remove the ugliness introduced by value type node
+- Use ModifiedFowlerNollVo instead of Crc32 (337 vs 532)
+- Children stored as start and end indices
+- Generic Hashtable to avoid boxing
+- Avoid finding children if node is terminal (bug)
+- change node to a struct and allocate in one large batch
+- When rotating level, rotate the original level, likewise for mirror
+- Collect shortest path arrays into a single object
+- Use jagged arrays instead of 2D arrays in shortest path
+- rewrite priority queue as FastQueue
+- Priority Queue
+- Delay adding infinities
+- Mark accessible after duplicate check when optimizing moves
+- Eliminate mark accessible and replace with Dijkstra
+- Implement specialized PushBox and PullBox
+- Use table lookup for motions and opposites
+- Use array for children instead of list
+- Use jagged arrays instead of two-dimensional array
+- Cache rowData in HashCode and FindChildren
+- Use public members instead of properties for Node (reverted)
+- Optimize FloodFill
+- Use generic comparer in priority queue to avoid boxing
+- Use Hashtable instead of SortedDictionary
+- show pushes in status bar
+- rename levelset to levelSet
+- rename unmovable to frozen
+- report current depth and total nodes in solver
+- find optimal path between pushes
+- find straight path if possible
+- avoid unnecessary IsValidCell calls
+- avoid nodes with frozen destinations
+- detect frozen triples
+- detect walls without egress
+- profile and optimize first order performance problems
+- detect frozen pairs
+- remove no solution found messagebox
+
+Recollected Levels to be Re-Solved
+==================================
+
+Microcosmos-18 - wedge with nook level
+Microcosmos-21 - start with two on the left level
+Microcosmos-23 - tube on the bottom level
+Microcosmos-25 - store three on top level
+Microcosmos-32 - unreachable center square level
+Microcosmos-38 - vertical pipes level
+
+Stats
+=====
+
+Level 50 - 60,000,000 nodes
+---------------------------
+
+By Pushes - 550/120:
+
+dddrUUluRRRuurrddddllLrrruuuullddRllldlddrUrrrrrdrruLLLuUlluurrrrddDuuullllddrrUdddrdrruLuuuuuruulDDDlLddlluuuurrRlllddddrruuLrddlllllddrUluRRRuUrrddddLLLrrruuuullddRllldlddrUrrrrRdrruLLLuUlluurrrrDDDuuullllddrrUdlllllddrUluRRRuurRddddLLLrrruuuullddlldlddrUrrrrrdrruLuuuuuruulDllllDDrrddddRdrruLuuuuLLLrddddllllluurrrRllllddrrrrruUUdddllllUluRRRRlllddrrrrRdrruLuuuulLrrddddLLLLLrrruUUdlllldlddrUUluRRRRlllddrrrruUddrruuuuUruulDlllllulldRDDDDlddrUluRRRRlllddrrrrrruuuuUruulDllllLulDDDDDlddrUluRRRllddrrrrrruuuuUruLLLLLLulDDDDuuurrrrrrddddddlllllluluRR
+
+Found 1 solutions searching 373287964 nodes with 176520915 duplicates.
+Solution moves 550, pushes 120, changes 43, min-box-moves 9.
+Nodes used 50534232, nodes free 90347.
+Elapsed time was 656.984 seconds.
+
+By Moves - 514/128:
+
+dddrUUluRRRuurrddddllLrrruuuullddRllldlddrUrrrrrdrruLLLuUlluurrrrddDuuullllddrrUdddrdrruLuuuuuruulDDDlLddlluuuurrRlllddddrruuLrddlllllddrUluRRRuUrrddddLLLrrruuuullddRllldlddrUrrrrRdrruLLLuUlluurrrrDDDuuullllddrrUdlllllddrUluRRRuurRddddLLLrrruuuullddRllldlddrUrrrrrdrruLuuuuuruulDllllDDuurrrrDDLLLrdDlllllddrUluRRlddrrrrUUUdddRdrruLuuUUlLrrUruulDlllllulldRDDDDrRRllllddrrrrruUUdddllllUluRRRRlllddrrrrRdrruLLLLLLrrruUlllldlddrUUluRRRRlllddrrrrrruuuuUruulDllllLulDDDDDlddrUluRRRllddrrrrrruuuuUruLLLLLLulDDDDDlddrUluRR
+
+Found 2 solutions searching 446216177 nodes with 222355773 duplicates.
+Solution moves 514, pushes 128, changes 49, min-box-moves 10.
+Nodes used 50525418, nodes free 248825.
+Elapsed time was 873.484 seconds.
+
+Found 1 solutions searching 66188569 nodes,
+    with 32938075 duplicates.
+Solution moves 550, pushes 120, changes 43,
+    min-box-moves 9, min-traversal-count 1.
+Nodes used 11144853, nodes free 37321.
+Elapsed time was 142.75 seconds.
+
+Traversal map:
+#####  ####
+#133####44#
+#1768888~5#
+##7#4###~5#
+ #7#~~~9~##
+##6#~#~#~# 
+#~~~~~~#~# 
+#~~###~#~##
+#~~~~~~~~6#
+#55####666#
+####  #####
+
+Found 5 solutions searching 24014743 nodes,
+    with 10918474 duplicates.
+Solution moves 230, pushes 97, changes 16,
+    min-box-moves 12, min-traversal-count 0.
+Nodes used 2694252, nodes free 370246.
+Elapsed time was 53.0781 seconds.
+
+Traversal map:
+    #####          
+    #122#          
+    #213#          
+  ###656##         
+  #55~475#         
+###5#~##5#   ######
+#116#8##5#####2531#
+#1288~~~~~~~~~~~31#
+##### ### #1##3631#
+    #     #########
+    #######        
+
+Caves
+=====
+
+1-box cave
+ #####
+##   #
+#    #
+#  ###
+## #
+
+1-box cave
+  ####
+###  #
+#    #
+#    #
+## ###
+
+2-box cave
+ #####
+##   #
+#    #
+#    #
+## ###
+
+T T  0
+T F  1
+F T -1
+F T  0
+
+Fix deadlocks: (maybe just slow?)
+
+##############################################
+#---###########----------------------------###
+#-*--#########--*-*#***********--*********--##
+#-**--#######--**-*-------------**-------**--#
+#-*-*--#####--*-*-*-##########-**-#######-**-#
+#-*--*--###--*--*-*-##########-*--#######--*-#
+#-*#-*--###--*-#*-*-##########-*-#########-*-#
+#-*--#*--#--*#--*-*-##########-*-#########-*-#
+#-*-#--*---*--#-*-*-##########-*--#######--*-#
+#-*-#--**-**--#-*-*------------#.--#####--.#-#
+#-*-##--*-*--##-*-*#**********$-**-------**--#
+#-*-###--*--###-*-*------------#-.*******.-#-#
+#-*-####---####-*-*-###########-.*-------*.-##
+#-*-###########-*-*-##########-.*$##---##$*.-#
+#-*-###########-*-*-##########-*$-#######-$*-#
+#-*-###########-*-*-##########-*--#######--*-#
+#-*-###########-*-*-##########-*--#######--*-#
+#-*-###########-*-*-##########-*--#######--*-#
+#-*-###########-*-*-##########-**-#######-**-#
+#-*-###########-*-*-##########--**-------**--#
+#-$-###########-$#$-###########--*********--##
+#--@###########----------------------------###
+##############################################
+
+Cannot solve even though solvable:
+
+###################
+#@             .# #
+#$### #########$  #
+#     #  .      #$#
+# ###$# #$##### # #
+#       #     # # #
+# ########### # # #
+#.###   #   # # #.#
+#.  # #   #   # ###
+### # ##$## # # $.#
+  # #  .  # # # #*#
+  # ###.$ # #$# . #
+  #    #$ # #.#$$ #
+  ####  . # ###.$.#
+     ######      ##
+          ########
+
+rrrrddllllddrrrrrruurrrrrrrrddddddddDRurDlluuuRluuuuuuUrrDDDDuuuulldllllllllddll
+lllluurrrrDulllldddddrrddddrrrdrrruuLDuullluuurrdrDDrddlUruLuururrdddddddrrrrrUU
+luuuuuuuuullllllllddlLLLLrrruulllldDDDuuuurrrruullllDDDDDurrrrrruurrrrrrrrdddddd
+dddrddllllluuuuuurrddDuuuuuullllU
+
+rrrrddlllldddddrrddddrrrdrrruuulllluuurrdrrurrdddddddrrrruRUdldlllluuuuuuulldllu
+lldddrrrrdddlllullluuuulluuurrrrrruurrrrrrrrUrrDDDDuuuulldddddddddDrddllllluuuuu
+uulldlDururrdddddddrrrrruuluuuRluuuuuullllllllddlllllluurrrrDulllldddddrrddddrrr
+drrruuLDruuLuururrdddddddrrrrruuluuuuuuuuullllllllddlLLLLrrruulllldDDDuurrrruuuu
+llllDDDDDurrrrrruurrrrrrrrdddddddddrddllllluuuuuurrddDuuuuuullllU
+
+Same problem condensed down:
+
+###
+#@#
+#$#
+#.#
+###
+
+
+? Debug.WriteLine(LevelUtils.MapAsText(level, simpleDeadlockMap))

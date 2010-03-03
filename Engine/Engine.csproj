@@ -1,0 +1,154 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0DD8D98A-9069-480C-AF99-C8234E8E4018}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sokoban.Engine</RootNamespace>
+    <AssemblyName>Engine</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release %28Reference%29|AnyCPU' ">
+    <OutputPath>..\bin\Release %28Reference%29\</OutputPath>
+    <DefineConstants>TRACE;USE_REFERENCE_TYPE_FOR_NODE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collections\IPositionLookupTable.cs" />
+    <Compile Include="Core\CollectionFromEnumerable.cs" />
+    <Compile Include="Core\HashtableUtils.cs" />
+    <Compile Include="Core\ISet.cs" />
+    <Compile Include="Core\IStack.cs" />
+    <Compile Include="Core\Set.cs" />
+    <Compile Include="Core\TwoLayerHashtable.cs" />
+    <Compile Include="Levels\Operation.cs" />
+    <Compile Include="Levels\OperationDirectionPair.cs" />
+    <Compile Include="Levels\CellData.cs" />
+    <Compile Include="Paths\AnyPathFinder.cs" />
+    <Compile Include="Core\Array2D.cs" />
+    <Compile Include="Paths\ArrayPathFinder.cs" />
+    <Compile Include="Core\Axis.cs" />
+    <Compile Include="Deadlocks\BackwardsDeadlockFinder.cs" />
+    <Compile Include="Deadlocks\BackwardsSubsetSolver.cs" />
+    <Compile Include="Paths\BruteForceRegionFinder.cs" />
+    <Compile Include="Paths\IncrementalAnyPathFinder.cs" />
+    <Compile Include="Paths\IncrementalRegionFinder.cs" />
+    <Compile Include="Solvers\BruteForceSolver.cs" />
+    <Compile Include="Levels\Cell.cs" />
+    <Compile Include="Core\CombinationUtils.cs" />
+    <Compile Include="Deadlocks\ComparisonDeadlockFinder.cs" />
+    <Compile Include="Paths\ComparisonPathFinder.cs" />
+    <Compile Include="Core\Coordinate2D.cs" />
+    <Compile Include="Core\CoordinatesByRow.cs" />
+    <Compile Include="Deadlocks\CoordinateUtils.cs" />
+    <Compile Include="Deadlocks\Deadlock.cs" />
+    <Compile Include="Deadlocks\DeadlockFinder.cs" />
+    <Compile Include="Deadlocks\DeadlockUtils.cs" />
+    <Compile Include="Solvers\CurrentState.cs" />
+    <Compile Include="Solvers\MoveState.cs" />
+    <Compile Include="Solvers\NodeFlags.cs" />
+    <Compile Include="Solvers\NodeHelper.cs" />
+    <Compile Include="Solvers\Reference\Node.cs" />
+    <Compile Include="Solvers\Reference\NodeCollection.cs" />
+    <Compile Include="Solvers\Reference\TranspositionTable.cs" />
+    <Compile Include="Solvers\SolverValidator.cs" />
+    <Compile Include="Solvers\Value\Node.cs" />
+    <Compile Include="Solvers\Value\NodeCollection.cs" />
+    <Compile Include="Solvers\Value\TranspositionTable.cs" />
+    <Compile Include="Utilities\CancelInfo.cs" />
+    <Compile Include="Utilities\DebuggerWriter.cs" />
+    <Compile Include="Paths\DijkstraPathFinder.cs" />
+    <Compile Include="Core\Direction.cs" />
+    <Compile Include="Core\FixedQueue.cs" />
+    <Compile Include="Deadlocks\ForewardsDeadlockFinder.cs" />
+    <Compile Include="Deadlocks\ForewardsSubsetSolver.cs" />
+    <Compile Include="Core\SegmentedArray.cs" />
+    <Compile Include="Deadlocks\FrozenDeadlockFinder.cs" />
+    <Compile Include="Levels\Glyph.cs" />
+    <Compile Include="Deadlocks\HardCodedDeadlockFinder.cs" />
+    <Compile Include="Levels\HashKey.cs" />
+    <Compile Include="Core\Hashtable.cs" />
+    <Compile Include="Levels\Level.cs" />
+    <Compile Include="Collections\TransformationInvariantLevelSet.cs" />
+    <Compile Include="Levels\LevelEncoder.cs" />
+    <Compile Include="Levels\LevelNormalizer.cs" />
+    <Compile Include="Levels\LevelSet.cs" />
+    <Compile Include="Levels\LevelUtils.cs" />
+    <Compile Include="Deadlocks\LevelUtilsDeadlockFinder.cs" />
+    <Compile Include="Utilities\Log.cs" />
+    <Compile Include="Solvers\LowerBoundSolver.cs" />
+    <Compile Include="Core\MersenneTwister.cs" />
+    <Compile Include="Levels\MoveList.cs" />
+    <Compile Include="Core\MultipleEnumerable.cs" />
+    <Compile Include="Paths\PathFinder.cs" />
+    <Compile Include="Levels\PlayingLevel.cs" />
+    <Compile Include="Collections\PositionLookupTable.cs" />
+    <Compile Include="Collections\IPositionSet.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Paths\Region.cs" />
+    <Compile Include="Paths\RegionFinder.cs" />
+    <Compile Include="Collections\ReliablePositionSet.cs" />
+    <Compile Include="Core\SegmentedStack.cs" />
+    <Compile Include="Paths\ShortestPathFinder.cs" />
+    <Compile Include="Paths\SmallLevelAnyPathFinder.cs" />
+    <Compile Include="Paths\SmallLevelShortestPathFinder.cs" />
+    <Compile Include="Levels\SolutionEncoder.cs" />
+    <Compile Include="Solvers\Solver.cs" />
+    <Compile Include="Solvers\SolverAlgorithm.cs" />
+    <Compile Include="Solvers\SolverException.cs" />
+    <Compile Include="Deadlocks\SubsetSolver.cs" />
+    <Compile Include="Deadlocks\TableBasedDeadlockFinder.cs" />
+    <Compile Include="Utilities\TimeSnapshot.cs" />
+    <Compile Include="Collections\UnreliablePositionSet.cs" />
+    <Compile Include="UnusedCode.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>$(SolutionDir)\laa.cmd "$(TargetPath)"</PostBuildEvent>
+  </PropertyGroup>
+</Project>
