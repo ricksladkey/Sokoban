@@ -52,6 +52,111 @@ namespace Sokoban.SolverTool
                 int intValue = AsInteger(stringValue);
                 bool boolValue = intValue != 0;
 
+                if (arg == "--solver-algorithm")
+                {
+                    tool.SolverAlgorithm = (SolverAlgorithm)Enum.Parse(typeof(SolverAlgorithm), stringValue);
+                    i++;
+                    continue;
+                }
+
+                if (arg == "--reuse-solver")
+                {
+                    tool.ReuseSolver = boolValue;
+                    i++;
+                    continue;
+                }
+
+                if (arg == "--repetitions")
+                {
+                    tool.Repetitions = intValue;
+                    i++;
+                    continue;
+                }
+
+                if (arg == "--deadlocks-directory")
+                {
+                    tool.DeadlocksDirectory = stringValue;
+                    i++;
+                    continue;
+                }
+
+                if (arg == "--collect-solutions")
+                {
+                    tool.CollectSolutions = boolValue;
+                    i++;
+                    continue;
+                }
+
+                if (arg == "--calculate-deadlocks")
+                {
+                    tool.CalculateDeadlocks = boolValue;
+                    i++;
+                    continue;
+                }
+
+                if (arg == "--hard-coded-deadlocks")
+                {
+                    tool.HardCodedDeadlocks = boolValue;
+                    i++;
+                    continue;
+                }
+
+                if (arg == "--level")
+                {
+                    tool.Level = new Level(LevelEncoder.DecodeLevel(stringValue));
+                    i++;
+                    continue;
+                }
+
+                if (arg == "--maximum-nodes")
+                {
+                    tool.MaximumNodes = intValue;
+                    i++;
+                    continue;
+                }
+
+                if (arg == "--initial-capacity")
+                {
+                    tool.InitialCapacity = intValue;
+                    i++;
+                    continue;
+                }
+
+                if (arg == "--optimize-moves")
+                {
+                    tool.OptimizeMoves = boolValue;
+                    i++;
+                    continue;
+                }
+
+                if (arg == "--optimize-pushes")
+                {
+                    tool.OptimizePushes = boolValue;
+                    i++;
+                    continue;
+                }
+
+                if (arg == "--detect-no-influence-pushes")
+                {
+                    tool.DetectNoInfluencePushes = boolValue;
+                    i++;
+                    continue;
+                }
+
+                if (arg == "--validate")
+                {
+                    tool.Validate = boolValue;
+                    i++;
+                    continue;
+                }
+
+                if (arg == "--verbose")
+                {
+                    tool.Verbose = boolValue;
+                    i++;
+                    continue;
+                }
+
                 if (arg == "--level-number")
                 {
                     levelIndex = intValue - 1;
@@ -67,6 +172,19 @@ namespace Sokoban.SolverTool
 
                 i--;
                 break;
+            }
+
+            tool.Initialize();
+
+            if (i == args.Length && tool.Level == null)
+            {
+                Console.WriteLine("nothing to solve");
+                Environment.Exit(1);
+            }
+
+            if (tool.Level != null)
+            {
+                tool.Solve();
             }
 
             while (i < args.Length)
@@ -90,13 +208,22 @@ namespace Sokoban.SolverTool
                 }
                 foreach (string file in fileList)
                 {
-                    if (levelIndex != -1)
+                    try
                     {
-                        tool.ProcessLevel(file, levelIndex);
+                        if (levelIndex != -1)
+                        {
+                            tool.ProcessLevel(file, levelIndex);
+                        }
+                        else
+                        {
+                            tool.ProcessLevelSet(file);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        tool.ProcessLevelSet(file);
+                        Console.WriteLine("Exception processing file {0}: {1}", arg, ex.Message);
+                        Console.WriteLine(ex.StackTrace);
+                        Environment.Exit(1);
                     }
                 }
             }

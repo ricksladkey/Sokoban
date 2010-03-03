@@ -31,14 +31,50 @@ using Sokoban.Engine.Utilities;
 
 namespace Sokoban.SolverTool
 {
-    public class Tool
+    public class Tool : ISolver
     {
         private ISolver solver;
 
         public Tool()
         {
             this.solver = null;
+
+            SolverAlgorithm = SolverAlgorithm.BruteForce;
+            ReuseSolver = true;
+            Repetitions = 1;
+            DeadlocksDirectory = null;
+            CollectSolutions = true;
+            CalculateDeadlocks = true;
+            HardCodedDeadlocks = false;
+            MaximumNodes = 10000000;
+            InitialCapacity = 10000000;
+            OptimizeMoves = true;
+            OptimizePushes = true;
+            DetectNoInfluencePushes = true;
+            Validate = false;
+            Verbose = true;
+            Level = null;
         }
+
+        public void Initialize()
+        {
+            if (Verbose)
+            {
+                Log.DebugPrint("SolverAlgorithm = {0}", SolverAlgorithm);
+                Log.DebugPrint("DeadlocksDirectory = {0}", DeadlocksDirectory);
+                Log.DebugPrint("CollectSolutions = {0}", CollectSolutions);
+                Log.DebugPrint("CalculateDeadlocks = {0}", CalculateDeadlocks);
+                Log.DebugPrint("HardCodedDeadlocks = {0}", HardCodedDeadlocks);
+                Log.DebugPrint("MaximumNodes = {0}", MaximumNodes);
+                Log.DebugPrint("InitialCapacity = {0}", InitialCapacity);
+                Log.DebugPrint("OptimizeMoves = {0}", OptimizeMoves);
+                Log.DebugPrint("OptimizePushes = {0}", OptimizePushes);
+                Log.DebugPrint("DetectNoInfluencePushes = {0}", DetectNoInfluencePushes);
+                Log.DebugPrint("Validate = {0}", Validate);
+                Log.DebugPrint("Verbose = {0}", Verbose);
+            }
+        }
+
 
         public void ProcessLevelSet(string filename)
         {
@@ -47,37 +83,75 @@ namespace Sokoban.SolverTool
             int i = 0;
             foreach (Level level in levelSet)
             {
-                ProcessLevel(level, i);
+                Log.DebugPrint("solving level {0}...", i + 1);
+                ProcessLevel(level);
                 i++;
             }
         }
 
         public void ProcessLevel(string filename, int index)
         {
-            Log.DebugPrint("Processing level {0} in file {1}", index + 1, filename);
+            Log.DebugPrint("solving level {0} in file {1}", index + 1, filename);
             LevelSet levelSet = new LevelSet(filename);
-            ProcessLevel(levelSet[index], index);
+            ProcessLevel(levelSet[index]);
         }
 
-        private void ProcessLevel(Level level, int index)
+        private void CreateOrReuseSolver()
         {
-            Log.DebugPrint("solving level {0}...", index + 1);
+            if (!ReuseSolver || solver == null)
+            {
+                CreateSolver();
+            }
+        }
+
+        private void CreateSolver()
+        {
+            solver = Solver.CreateInstance(SolverAlgorithm);
+            solver.DeadlocksDirectory = DeadlocksDirectory;
+            solver.CollectSolutions = CollectSolutions;
+            solver.CalculateDeadlocks = CalculateDeadlocks;
+            solver.HardCodedDeadlocks = HardCodedDeadlocks;
+            solver.MaximumNodes = MaximumNodes;
+            solver.InitialCapacity = InitialCapacity;
+            solver.OptimizeMoves = OptimizeMoves;
+            solver.OptimizePushes = OptimizePushes;
+            solver.DetectNoInfluencePushes = DetectNoInfluencePushes;
+            solver.Validate = Validate;
+            solver.Verbose = Verbose;
+        }
+
+        private void ProcessLevel(Level level)
+        {
+            bool solved = false;
+            Log.DebugPrint(level.AsText);
+            if (Repetitions > 1)
+            {
+                Log.DebugPrint("solving {0} times...", Repetitions);
+            }
             TimeSnapshot start = TimeSnapshot.Now;
-            solver = Solver.CreateInstance();
-            solver.Verbose = true;
-            solver.Level = level;
-            Log.DebugPrint("solver.OptimizeMoves: {0}", solver.OptimizeMoves);
-            Log.DebugPrint("solver.OptimizePushes: {0}", solver.OptimizePushes);
-            Log.DebugPrint("solver.CalculateDeadlocks: {0}", solver.CalculateDeadlocks);
-            Log.DebugPrint("solver.InitialCapacity: {0}", solver.InitialCapacity);
-            Log.DebugPrint("solver.MaximumNodes: {0}", solver.MaximumNodes);
-            bool solved = solver.Solve();
+            for (int i = 0; i < Repetitions; i++)
+            {
+                CreateOrReuseSolver();
+                solver.Level = level;
+                solved = solver.Solve();
+            }
             TimeSnapshot end = TimeSnapshot.Now;
             Log.DebugPrint("solving took {0} seconds", (end.RealTime - start.RealTime).TotalSeconds);
+            if (Repetitions > 1)
+            {
+                Log.DebugPrint("solving took {0} seconds per solution", (end.RealTime - start.RealTime).TotalSeconds / Repetitions);
+            }
             Log.DebugPrint(solver.CancelInfo.Info);
             if (solved)
             {
-                Log.DebugPrint("solution: {0}", solver.Solution.AsText);
+                if (solver.Solution != null)
+                {
+                    Log.DebugPrint("solution: {0}", solver.Solution.AsText);
+                }
+                else
+                {
+                    Log.DebugPrint("solution not collected");
+                }
             }
 #if false
             Log.DebugPrint("solving took {0} total CPU seconds", (end.TotalTime - start.TotalTime).TotalSeconds);
@@ -85,5 +159,49 @@ namespace Sokoban.SolverTool
             Console.ReadKey();
 #endif
         }
+
+        public SolverAlgorithm SolverAlgorithm { get; set; }
+        public bool ReuseSolver { get; set; }
+        public int Repetitions { get; set; }
+
+        #region ISolver Members
+
+        public string DeadlocksDirectory { get; set; }
+        public bool CollectSolutions { get; set; }
+        public bool CalculateDeadlocks { get; set; }
+        public bool HardCodedDeadlocks { get; set; }
+        public Level Level { get; set; }
+        public int MaximumNodes { get; set; }
+        public int InitialCapacity { get; set; }
+        public bool OptimizeMoves { get; set; }
+        public bool OptimizePushes { get; set; }
+        public bool DetectNoInfluencePushes { get; set; }
+        public bool Validate { get; set; }
+        public bool Verbose { get; set; }
+        public CancelInfo CancelInfo { get; set; }
+
+        public MoveList Solution
+        {
+            get
+            {
+                return solver.Solution;
+            }
+        }
+
+        public string Error
+        {
+            get
+            {
+                return solver.Error;
+            }
+        }
+
+        public bool Solve()
+        {
+            ProcessLevel(Level);
+            return solver.Solution != null;
+        }
+
+        #endregion
     }
 }

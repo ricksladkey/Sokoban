@@ -639,15 +639,14 @@ namespace Sokoban.Engine.Solvers
 
         protected void SetFinalInfo(int depth)
         {
-            foreach (MoveList s in solutions)
-            {
-                Log.DebugPrint(String.Format("solution: {0}/{1}", s.Count, LevelUtils.SolutionPushes(s)));
-            }
-
             info = "";
             if (error != "")
             {
                 info += error + "\r\n";
+            }
+            foreach (MoveList s in solutions)
+            {
+                info += String.Format("solution: {0}/{1}\r\n", s.Count, LevelUtils.SolutionPushes(s));
             }
             info += String.Format("Found {0} solutions searching {1:#,##0} nodes,\r\n    with {2:#,##0} duplicates.\r\n",
                 solutions.Count, nodes.Visited, duplicates);
