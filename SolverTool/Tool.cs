@@ -46,8 +46,8 @@ namespace Sokoban.SolverTool
             CollectSolutions = true;
             CalculateDeadlocks = true;
             HardCodedDeadlocks = false;
-            MaximumNodes = 10000000;
-            InitialCapacity = 10000000;
+            MaximumNodes = 40000000;
+            InitialCapacity = 20000000;
             OptimizeMoves = true;
             OptimizePushes = true;
             DetectNoInfluencePushes = true;
