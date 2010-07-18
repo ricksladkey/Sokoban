@@ -267,6 +267,18 @@ namespace Sokoban.Engine.Solvers.Reference
             }
         }
 
+        public bool Released
+        {
+            get
+            {
+                return FlagGetter(NodeFlags.Released);
+            }
+            set
+            {
+                FlagSetter(NodeFlags.Released, value);
+            }
+        }
+
 #if DEBUG
         public HashKey HashKey
         {

@@ -32,6 +32,7 @@ namespace Sokoban.Engine.Solvers
         InTable = 0x10,
         InTree = 0x20,
         Free = 0x40,
+        Released = 0x80,
     }
 
 }

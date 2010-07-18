@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{B49F7555-F393-4CAE-96C5-FFE5B586B7D1}"
 	ProjectSection(SolutionItems) = preProject
 		gpl-3.0.txt = gpl-3.0.txt
+		LevelSets\microcosmos.txt = LevelSets\microcosmos.txt
+		LevelSets\minicosmos.txt = LevelSets\minicosmos.txt
+		LevelSets\nabokosmos.txt = LevelSets\nabokosmos.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{0A7FE9DE-1651-41B7-A8AD-D5F81CABF4E0}"

@@ -39,14 +39,12 @@ namespace Sokoban.Engine.Solvers.Reference
         private int releasedCount;
         private bool validate;
         private List<Node> nodeList;
-        private List<Node> freeList;
 
         public NodeCollection(int capacity, bool validate)
         {
             this.capacity = capacity;
             this.validate = validate;
             this.nodeList = new List<Node>();
-            this.freeList = new List<Node>();
         }
 
         public int Capcity
@@ -103,9 +101,7 @@ namespace Sokoban.Engine.Solvers.Reference
         {
             if (validate)
             {
-                // XXX: Not efficient
-                nodeList.Remove(node);
-                freeList.Add(node);
+                node.Released = true;
             }
             releasedCount++;
         }
@@ -115,7 +111,6 @@ namespace Sokoban.Engine.Solvers.Reference
             if (validate)
             {
                 nodeList.Clear();
-                freeList.Clear();
             }
             nodeCount = 0;
             visitedCount = 0;
@@ -129,18 +124,16 @@ namespace Sokoban.Engine.Solvers.Reference
                 nodeList[i].Free = false;
                 nodeList[i].InTree = false;
             }
-            for (int i = 0; i < freeList.Count; i++)
-            {
-                freeList[i].Free = false;
-                freeList[i].InTree = false;
-            }
         }
 
         public void MarkFree()
         {
-            for (int i = 0; i < freeList.Count; i++)
+            for (int i = 0; i < nodeList.Count; i++)
             {
-                freeList[i].Free = true;
+                if (nodeList[i].Released)
+                {
+                    nodeList[i].Free = true;
+                }
             }
         }
 
@@ -152,10 +145,6 @@ namespace Sokoban.Engine.Solvers.Reference
                 {
                     yield return nodeList[i];
                 }
-                for (int i = 0; i < freeList.Count; i++)
-                {
-                    yield return freeList[i];
-                }
             }
         }
 
@@ -165,7 +154,10 @@ namespace Sokoban.Engine.Solvers.Reference
         {
             for (int i = 0; i < nodeList.Count; i++)
             {
-                yield return nodeList[i];
+                if (!nodeList[i].Released)
+                {
+                    yield return nodeList[i];
+                }
             }
         }
 

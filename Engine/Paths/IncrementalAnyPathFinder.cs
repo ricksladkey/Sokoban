@@ -210,7 +210,7 @@ namespace Sokoban.Engine.Paths
             MoveBoxAndTryToUpdate(operation, oldBoxRow, oldBoxColumn, newBoxRow, newBoxColumn);
             if (isDirty)
             {
-                System.Diagnostics.Debug.Assert(IsAccessible(findRow, findColumn));
+                System.Diagnostics.Debug.Assert(level.IsEmpty(findRow, findColumn));
                 Find(findRow, findColumn);
             }
             System.Diagnostics.Debug.Assert(isDirty == false);

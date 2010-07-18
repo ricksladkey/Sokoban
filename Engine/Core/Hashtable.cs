@@ -304,7 +304,7 @@ namespace Sokoban.Engine.Core
             {
                 if (table[index].IsOccupied)
                 {
-                    int tableHash = comparer.GetHashCode(table[index].Key);
+                    uint tableHash = (uint)comparer.GetHashCode(table[index].Key);
                     int tableIndex = (int)(tableHash % maximumCapacityUnsigned);
                     if (tableIndex != index)
                     {
