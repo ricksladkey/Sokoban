@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
 using System.IO;
-using NUnit.Framework;
 
 using Sokoban.Engine.Collections;
 using Sokoban.Engine.Core;
@@ -39,31 +38,31 @@ namespace Sokoban.UnitTests
             Log.LogToConsole = true;
         }
 
-        public static bool TestAreEqual<T>(T expected, T actual, IEqualityComparer<T> comparer)
+        public static bool TestEqual<T>(T expected, T actual, IEqualityComparer<T> comparer)
         {
             return comparer.Equals(expected, actual);
         }
 
-        public static bool TestAreEqual<T>(T expected, T actual)
+        public static bool TestEqual<T>(T expected, T actual)
         {
-            return TestAreEqual(expected, actual, EqualityComparer<T>.Default);
+            return TestEqual(expected, actual, EqualityComparer<T>.Default);
         }
 
-        public static void AreEqual<T>(T expected, T actual, string message)
+        public static void Equal<T>(T expected, T actual, string message)
         {
-            NUnit.Framework.Assert.AreEqual(expected, actual, message);
+            Xunit.Assert.True(EqualityComparer<T>.Default.Equals(expected, actual), message);
         }
 
-        public static void AreEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual, string message)
+        public static void Equal<T>(IEnumerable<T> expected, IEnumerable<T> actual, string message)
         {
             List<T> expectedList = new List<T>(expected);
             List<T> actualList = new List<T>(actual);
-            AreEqual(expectedList.Count, actualList.Count, "lengths are mismatched");
+            Equal(expectedList.Count, actualList.Count, "lengths are mismatched");
             int n = expectedList.Count;
             List<string> messageList = new List<string>();
             for (int i = 0; i < n; i++)
             {
-                if (!TestAreEqual(expectedList[i], actualList[i]))
+                if (!TestEqual(expectedList[i], actualList[i]))
                 {
                     string detail = String.Format(message, i + 1);
                     string fullMessage = String.Format("\r\n{0} (expected {1} != actual {2})",
@@ -79,7 +78,7 @@ namespace Sokoban.UnitTests
 
         public static void Assert(bool value, string message)
         {
-            AreEqual(true, value, message);
+            Equal(true, value, message);
         }
 
         public static string StringList<T>(IEnumerable<T> list)
@@ -206,7 +205,7 @@ namespace Sokoban.UnitTests
         {
             List<int> pushList = new List<int>(pushes);
             List<int> moveList = new List<int>(moves);
-            TestUtils.AreEqual(moveList.Count, pushList.Count, "moves mismatch");
+            TestUtils.Equal(moveList.Count, pushList.Count, "moves mismatch");
             int n = pushList.Count;
             for (int i = 0; i < n; i++)
             {

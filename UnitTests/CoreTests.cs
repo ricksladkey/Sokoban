@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
 
 using Sokoban.Engine.Collections;
 using Sokoban.Engine.Core;
@@ -27,13 +26,13 @@ using Sokoban.Engine.Levels;
 using Sokoban.Engine.Paths;
 using Sokoban.Engine.Solvers;
 using Sokoban.Engine.Utilities;
+using Xunit;
 
 namespace Sokoban.UnitTests
 {
-    [TestFixture]
     public class CoreTests
     {
-        [Test]
+        [Fact]
         public void HashtableKeysTest()
         {
             Hashtable<int, string> hashtable = new Hashtable<int, string>();
