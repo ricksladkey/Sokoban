@@ -206,6 +206,14 @@ namespace Sokoban.Engine.Core
             }
         }
 
+        public void ExceptWith(IEnumerable<T> other)
+        {
+            foreach (T item in other)
+            {
+                Remove(item);
+            }
+        }
+
         #endregion
 
         private bool EnumerableContains(IEnumerable<T> other, T item)
